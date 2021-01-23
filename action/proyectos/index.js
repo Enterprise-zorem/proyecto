@@ -148,12 +148,17 @@ function eliminar(id)
     $('#proyectos_delete_id').val(id);
 }
 
-function modal_edit(value)
+function editar(value)
 {
-    $('#proyectos_edit_id').val(value['pk_cliente']);
-    $('#proyectos_edit_nombres').val(value['nombres']);
+    axios.post(RUTA + 'process.php/proyectos/listar', {id: value}).then(function(response){
+       var project = response.data;
+
+    $('#proyectos_edit_id').val(project['pk_proyecto']);
+    $('#proyectos_edit_nombres').val(project['name']);
     $('#proyectos_edit_dni').val(value['dni']);
     $('#proyectos_edit_birthdate').val(value['birth_date']);
     $('#proyectos_edit_telefono').val(value['telefono']);
     $('#proyectos_edit_email').val(value['email']);
+    })
+   
 }

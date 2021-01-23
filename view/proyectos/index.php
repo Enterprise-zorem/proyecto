@@ -73,8 +73,8 @@ include "view/body_header.php";
                                         <div class="dropdown dropdown-action profile-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_project"><i class="fa fa-pencil m-r-5"></i> Editar</a>
-                                                <a onclick="eliminar(<?=$row['pk_proyecto']?>);" class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="fa fa-trash-o m-r-5"></i> Eliminar</a>
+                                                <a  onclick="editar(<?=$row['pk_proyecto']?>)" class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_project"><i class="fa fa-pencil m-r-5"></i> Editar</a>
+                                                <a onclick="eliminar(<?=$row['pk_proyecto']?>)" class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="fa fa-trash-o m-r-5"></i> Eliminar</a>
                                             </div>
                                         </div>
                                         <h4 class="project-title"><a href="<?=RUTA?>proyectos/view/<?=$row['pk_proyecto']?>"><?=$row['name']?></a></h4>
@@ -265,7 +265,7 @@ include "view/body_header.php";
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Project Name</label>
-                                            <input class="form-control" value="Project Management" type="text">
+                                            <input class="form-control" type="text" id="proyectos_edit_nombres">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">

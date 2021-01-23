@@ -150,7 +150,7 @@ function eliminar(id)
 
 function modal_edit(value)
 {
-    axios.post(RUTA+'process.php/proyectos/tarea/getAllById', {id: value}).then((response)=>{
+    axios.post(RUTA+'process.php/proyectos/tarea/listar', {id: value}).then((response)=>{
         var task = response.data;
         var duracion = parseInt(task['duration']);
         var d = new Date(task['start_date']);
