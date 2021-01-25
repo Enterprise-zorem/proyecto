@@ -151,14 +151,28 @@ function eliminar(id)
 function editar(value)
 {
     axios.post(RUTA + 'process.php/proyectos/listar', {id: value}).then(function(response){
-       var project = response.data;
-
-    $('#proyectos_edit_id').val(project['pk_proyecto']);
+       console.log(response.data);
+        var project = response.data;
+       var duracion = parseInt(project['duration']);
+       var d = new Date(project['start_date']);
+       function sumar(fecha, dias){
+           fecha.setDate(fecha.getDate() + (dias + 1));
+           return fecha;
+       }
+       var end_date = sumar(d, duracion);
+       
+       end_date = new Date(end_date).toLocaleString('zh-Hans-CN', {
+           year: 'numeric',
+           month: '2-digit',
+           day: '2-digit',
+         })
+         .replace(/\//g, '-');
+    $('#proyecto_edit_pk_proyecto').val(project['pk_proyecto']);
     $('#proyectos_edit_nombres').val(project['name']);
-    $('#proyectos_edit_dni').val(value['dni']);
-    $('#proyectos_edit_birthdate').val(value['birth_date']);
-    $('#proyectos_edit_telefono').val(value['telefono']);
-    $('#proyectos_edit_email').val(value['email']);
-    })
-   
+    $('#proyectos_edit_fk_cliente').val(project['fk_cliente']);
+    $('#proyecto_edit_start_date').val(project['start_date']);
+    $('#proyecto_edit_end_date').val(end_date);
+    $('#proyecto_edit_presupuesto').val(project['presupuesto']);   
+    $('#proyecto_edit_descripcion').val(project['descripcion']);
+    });
 }

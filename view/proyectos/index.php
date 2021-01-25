@@ -260,22 +260,30 @@ include "view/body_header.php";
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form id="form-edit-proyectos" method="POST" action="<?=RUTA?>process.php/proyectos/update" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Project Name</label>
-                                            <input class="form-control" type="text" id="proyectos_edit_nombres">
+                                            <input class="form-control" type="text" id="proyectos_edit_nombres" name="proyectos_edit_nombres">
+                                            <input class="form-control" type="hidden" id="proyecto_edit_pk_proyecto" name="proyecto_edit_pk_proyecto">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Client</label>
-                                            <select class="select">
-                                                <option>Global Technologies</option>
-                                                <option>Delta Infotech</option>
-                                            </select>
-                                        </div>
+                                            <div class="form-group">
+                                                <label>Cliente</label>
+                                                <select class="select" name="proyectos_edit_fk_cliente" id="proyectos_edit_fk_cliente">
+                                                <?php 
+                                                $cliente=new cliente(new Connexion);
+                                                $cliente=$cliente->getAll();
+                                                    while ($row=mysqli_fetch_array($cliente,MYSQLI_ASSOC)) {
+                                                        ?>
+                                                        <option value="<?=$row['pk_cliente']?>"><?=$row['nombres']." ".$row['apellidos']?></option>
+                                                        <?php
+                                                    }
+                                                ?>
+                                                </select>
+                                            </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -283,7 +291,7 @@ include "view/body_header.php";
                                         <div class="form-group">
                                             <label>Start Date</label>
                                             <div class="cal-icon">
-                                                <input class="form-control datetimepicker" type="text">
+                                                <input class="form-control datetimepicker" type="text" name="proyecto_edit_start_date" id="proyecto_edit_start_date">
                                             </div>
                                         </div>
                                     </div>
@@ -291,7 +299,7 @@ include "view/body_header.php";
                                         <div class="form-group">
                                             <label>End Date</label>
                                             <div class="cal-icon">
-                                                <input class="form-control datetimepicker" type="text">
+                                                <input class="form-control datetimepicker" type="text" name="proyecto_edit_end_date" id="proyecto_edit_end_date">
                                             </div>
                                         </div>
                                     </div>
@@ -300,7 +308,7 @@ include "view/body_header.php";
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Rate</label>
-                                            <input placeholder="$50" class="form-control" value="$5000" type="text">
+                                            <input placeholder="$50" class="form-control" value="$5000" type="text" name="proyecto_edit_presupuesto" id="proyecto_edit_presupuesto">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -371,7 +379,7 @@ include "view/body_header.php";
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea rows="4" class="form-control" placeholder="Enter your message here"></textarea>
+                                    <textarea rows="4" class="form-control" placeholder="Enter your message here" id="proyecto_edit_descripcion" name="proyecto_edit_descripcion"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Upload Files</label>

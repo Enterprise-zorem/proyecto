@@ -203,4 +203,23 @@ class proyecto
             return "defaultValue";
         }
     }
+
+    public function update()
+    {
+       
+        $query = "UPDATE " . self::$tablename . "  SET `name`='$this->name', `descripcion`='$this->descripcion', `start_date` = '$this->start_date', `duration` = '$this->duration', `presupuesto`= '$this->presupuesto',`updated_at`='$this->updated_at', `fk_cliente`='$this->fk_cliente'";
+        
+
+        $query .= " WHERE pk_proyecto='$this->pk_proyecto'";
+        $this->con->query($query);
+
+        if (mysqli_error($this->con)) {
+            $result = mysqli_error($this->con);
+            mysqli_close($this->con);
+            return $result;
+        } else {
+            mysqli_close($this->con);
+            return "defaultValue";
+        }
+    }
 }
